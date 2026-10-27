@@ -1,0 +1,699 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "RRS AI Review - proposed application API",
+    "version": "1.0.0-draft",
+    "description": "Integration design only. No HTTP routes are installed by this package. Example IDs are illustrative."
+  },
+  "servers": [
+    {
+      "url": "/api/local/v1",
+      "description": "Proposed relative API prefix; no server is included."
+    }
+  ],
+  "paths": {
+    "/ai-reviews": {
+      "post": {
+        "operationId": "createReview",
+        "description": "Server resolves immutable references. Persist a job and return 202. Repeated identical idempotency key and body returns same job with HTTP 200; changed body is 409.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateReview"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Created; queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Accepted"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Existing idempotent job",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewJob"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Registered reference not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, source or idempotency conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Required evidence absent or incompatible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Worker unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ai-reviews/{jobId}": {
+      "get": {
+        "operationId": "readReview",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Job status and report",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewJob"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Registered reference not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/experiences/search": {
+      "post": {
+        "operationId": "searchExperiences",
+        "description": "Construct source/configuration/knowledge cutoff from the persisted job. Do not accept browser-supplied filesystem paths or trusted provenance.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Validated and applicable entries only",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Registered reference not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, source or idempotency conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Required evidence absent or incompatible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Worker unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "VersionRef": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "version"
+        ]
+      },
+      "CreateReview": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "apiVersion": {
+            "const": "1.0.0-draft"
+          },
+          "datasetId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "snapshotRef": {
+            "$ref": "#/components/schemas/VersionRef"
+          },
+          "runRef": {
+            "$ref": "#/components/schemas/VersionRef"
+          },
+          "planRef": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VersionRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "configVersion": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidenceBundleRef": {
+            "$ref": "#/components/schemas/VersionRef"
+          },
+          "module": {
+            "type": "string",
+            "enum": [
+              "routine",
+              "forecast",
+              "emergency",
+              "packing"
+            ]
+          },
+          "reviewMode": {
+            "type": "string",
+            "enum": [
+              "result_review",
+              "execution_review"
+            ]
+          },
+          "purpose": {
+            "type": "string",
+            "enum": [
+              "retrospective_review",
+              "decision_support"
+            ]
+          },
+          "knowledgeCutoff": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "idempotencyKey": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "apiVersion",
+          "datasetId",
+          "snapshotRef",
+          "runRef",
+          "planRef",
+          "configVersion",
+          "evidenceBundleRef",
+          "module",
+          "reviewMode",
+          "purpose",
+          "knowledgeCutoff",
+          "idempotencyKey"
+        ]
+      },
+      "Accepted": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "const": "queued"
+          },
+          "statusUrl": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "jobId",
+          "status",
+          "statusUrl"
+        ]
+      },
+      "Claim": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidenceIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "text",
+          "evidenceIds"
+        ]
+      },
+      "Suggestion": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "requiresValidation": {
+            "const": true
+          },
+          "evidenceIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "text",
+          "requiresValidation",
+          "evidenceIds"
+        ]
+      },
+      "Check": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PASS",
+              "FAIL",
+              "NOT_CHECKED"
+            ]
+          },
+          "evidenceIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "name",
+          "status",
+          "evidenceIds"
+        ]
+      },
+      "Report": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "summary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "deterministicChecks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Check"
+            }
+          },
+          "facts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Claim"
+            }
+          },
+          "hypotheses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Claim"
+            }
+          },
+          "suggestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Suggestion"
+            }
+          },
+          "experienceRefs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersionRef"
+            }
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "productionStateMutated": {
+            "const": false
+          }
+        },
+        "required": [
+          "summary",
+          "deterministicChecks",
+          "facts",
+          "hypotheses",
+          "suggestions",
+          "experienceRefs",
+          "limitations",
+          "productionStateMutated"
+        ]
+      },
+      "ErrorDetail": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 1
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorDetail"
+          }
+        },
+        "required": [
+          "error"
+        ]
+      },
+      "ReviewJob": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "apiVersion": {
+            "const": "1.0.0-draft"
+          },
+          "jobId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "request": {
+            "$ref": "#/components/schemas/CreateReview"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "queued",
+              "auditing",
+              "retrieving",
+              "analyzing",
+              "completed",
+              "failed"
+            ]
+          },
+          "auditStatus": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "PASS",
+              "FAIL",
+              "NOT_CHECKED"
+            ]
+          },
+          "llmStatus": {
+            "type": "string",
+            "enum": [
+              "not_configured",
+              "pending",
+              "succeeded",
+              "failed",
+              "skipped"
+            ]
+          },
+          "report": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Report"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ErrorDetail"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "apiVersion",
+          "jobId",
+          "request",
+          "status",
+          "auditStatus",
+          "llmStatus",
+          "report",
+          "error"
+        ]
+      },
+      "SearchRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "query": {
+            "type": "string",
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "jobId",
+          "query"
+        ]
+      },
+      "ExperienceHit": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ref": {
+            "$ref": "#/components/schemas/VersionRef"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "constraints": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "evidenceIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "ref",
+          "title",
+          "steps",
+          "constraints",
+          "evidenceIds"
+        ]
+      },
+      "SearchResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "executable": {
+            "const": false
+          },
+          "matches": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExperienceHit"
+            }
+          },
+          "excluded": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "entryRef": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/VersionRef"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "reasonCode": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "entryRef",
+                "reasonCode"
+              ]
+            }
+          }
+        },
+        "required": [
+          "jobId",
+          "executable",
+          "matches",
+          "excluded"
+        ]
+      }
+    }
+  }
+}

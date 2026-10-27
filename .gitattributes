@@ -1,0 +1,2 @@
+# Preserve exact file bytes used by MANIFEST.json across platforms.
+* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

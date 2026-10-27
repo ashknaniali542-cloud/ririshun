@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "id": "example-result-review",
+  "version": "0.1.0",
+  "title": "结果复核流程模板",
+  "module": "routine",
+  "kind": "procedure",
+  "status": "draft",
+  "source_scope": "synthetic_development",
+  "target_scopes": [
+    "synthetic_development"
+  ],
+  "available_at": "2020-01-03T00:00:00+00:00",
+  "applicability": {
+    "profile": "example-v1"
+  },
+  "triggers": [
+    {
+      "field": "task",
+      "op": "eq",
+      "value": "result_review"
+    }
+  ],
+  "evidence": [],
+  "steps": [
+    "核对来源与配置",
+    "运行确定性检查",
+    "记录适用条件与未验证项"
+  ],
+  "constraints": [
+    "不修改输入或生产状态"
+  ],
+  "not_applicable": [
+    "来源、配置或证据缺失"
+  ],
+  "validation": null,
+  "note": "空证据填写模板，check 应拒绝；不代表已验证的业务经验。"
+}

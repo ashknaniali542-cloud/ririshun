@@ -1,0 +1,161 @@
+{
+  "version": "public-methods-1.1",
+  "content": "Methods, code, artificial-data generators and documentation only",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 140,
+      "sha256": "0abff8524548eb415e785c1bd899c03b430a384898edca71a644290c352109da"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 459,
+      "sha256": "659c15e9605c8be512130eb4c9df5751c514be41acdd285533042fab33c375e9"
+    },
+    {
+      "path": "00_先读我.md",
+      "bytes": 471,
+      "sha256": "1b1ab1b9fe613bd59621ba2a640962951047fa3d1f493eca4abbb66ca8667543"
+    },
+    {
+      "path": "01_系统接入说明.md",
+      "bytes": 2413,
+      "sha256": "dec4f19dd81fbdb9830cb6500304d937d2df4b940926b37ba1143dc2cdc51ab4"
+    },
+    {
+      "path": "02_接口与数据/ai-review.openapi.json",
+      "bytes": 17946,
+      "sha256": "0f6201f553b29cd14452cd6a52ccfe7090d8432733ccb909eb1fd02d84d72ad8"
+    },
+    {
+      "path": "02_接口与数据/dataset-fields.json",
+      "bytes": 1585,
+      "sha256": "136b67b4180152bbc6d94710802117fe1befa816ab84e13f364411cc5f9b1ed5"
+    },
+    {
+      "path": "02_接口与数据/examples/accepted.json",
+      "bytes": 125,
+      "sha256": "2e4d30d8e442567d292821d3573cafba4ad5a46710037bda342c772dfd4a3489"
+    },
+    {
+      "path": "02_接口与数据/examples/completed-without-llm.json",
+      "bytes": 1584,
+      "sha256": "484e29d1d8cac221f2034453113c4129d502a580ab39290de33f26777abd92cd"
+    },
+    {
+      "path": "02_接口与数据/examples/create-review.json",
+      "bytes": 599,
+      "sha256": "32246abad3f2e8866611f70db2ea89c8ea154ddfb4952567a9cef76c3ee579dc"
+    },
+    {
+      "path": "02_接口与数据/examples/search-request.json",
+      "bytes": 76,
+      "sha256": "595c653deb2012c91d71471e23e5fe964aebeff902aa155583cc493bbc88ff39"
+    },
+    {
+      "path": "03_接入参考/LLM_SYSTEM_PROMPT.md",
+      "bytes": 1945,
+      "sha256": "6998803066a8d3f19809f5dd56606ed70a4ba543565d769b32be730ec444141f"
+    },
+    {
+      "path": "03_接入参考/ReviewPort.ts",
+      "bytes": 1714,
+      "sha256": "be3422cd829110c6ec7caf7fcb1876e220c13f878d5f64d2ddd6fb462b7279dd"
+    },
+    {
+      "path": "03_接入参考/python-worker.mjs",
+      "bytes": 1941,
+      "sha256": "bcc93273dd123a55780d6e3a0a84afd35d968426017c22210e9b3b1a3c0e208c"
+    },
+    {
+      "path": "04_离线演示/run_demo.py",
+      "bytes": 360,
+      "sha256": "7efd2ddcd237a89dc39167207e20d3e845d5416829d349ff05b97f5924c7088c"
+    },
+    {
+      "path": "05_原始Skill/rrs-operations-learning/LICENSE",
+      "bytes": 1089,
+      "sha256": "3f72f8f8b03914c8e14dcaf357f9a100775150efb817434a2e0929f73e2aa702"
+    },
+    {
+      "path": "05_原始Skill/rrs-operations-learning/SKILL.md",
+      "bytes": 2545,
+      "sha256": "57700823f1854d59e35726c2994f9e5aebff7d3c91bf6ab69198a9df4b616d83"
+    },
+    {
+      "path": "05_原始Skill/rrs-operations-learning/agents/openai.yaml",
+      "bytes": 398,
+      "sha256": "6510b32248448d2c788391bc06a1fed9617fdb300d0c7dc8c451ed53889eae6e"
+    },
+    {
+      "path": "05_原始Skill/rrs-operations-learning/assets/experience-template.json",
+      "bytes": 901,
+      "sha256": "72adeb5166e4cdf7d2bc0f50a3b5253655e399abf17460eae2bd3065b776791a"
+    },
+    {
+      "path": "05_原始Skill/rrs-operations-learning/references/domain-rules.md",
+      "bytes": 1761,
+      "sha256": "4fe848da0c58642cc4110f163d259ae80eaec202eed94c25f1d16a200f02e536"
+    },
+    {
+      "path": "05_原始Skill/rrs-operations-learning/references/experience-contract.md",
+      "bytes": 3039,
+      "sha256": "49cf47faf2410bb7bd78dc120b703f5e9aebd153f57323382f59691a37ca5e4c"
+    },
+    {
+      "path": "05_原始Skill/rrs-operations-learning/references/tool-bindings.md",
+      "bytes": 1548,
+      "sha256": "08fb7fd6d1617640e7ff6215b75394b9b97ee2e8e426191235195739f02c5b00"
+    },
+    {
+      "path": "05_原始Skill/rrs-operations-learning/references/upstream.md",
+      "bytes": 564,
+      "sha256": "68324d7779c3e7c0f652ae320b6b252029ae0d3c7fcdd84b02b5d6af32e9e5ec"
+    },
+    {
+      "path": "05_原始Skill/rrs-operations-learning/scripts/experience_store.py",
+      "bytes": 14657,
+      "sha256": "c297012ae2254147066f4f0cf6bc268d452e3d2161903ffa71ba799956a99d9c"
+    },
+    {
+      "path": "05_原始Skill/rrs-operations-learning/scripts/rrs_audit.py",
+      "bytes": 13773,
+      "sha256": "7f316785e713d56ad11d9330491a234d8bc92193da7e0a8a8264008eaae78ea7"
+    },
+    {
+      "path": "05_原始Skill/rrs-operations-learning/scripts/synthetic_demo.py",
+      "bytes": 8783,
+      "sha256": "736588c64b574fa77122a898b907a553b765a0e02b1c68e6be6e021b2429b315"
+    },
+    {
+      "path": "05_原始Skill/rrs-operations-learning/scripts/test_skill_tools.py",
+      "bytes": 7689,
+      "sha256": "5243c30fd1c0f8afbea7ac59f138823136877979ca4b412607c247ebf9b02740"
+    },
+    {
+      "path": "06_验证记录/validation.json",
+      "bytes": 548,
+      "sha256": "252423099ebb7d71877f88e6a9749e86abe2fe3853d5c421aab73844f69e6d11"
+    },
+    {
+      "path": "06_验证记录/验证摘要.md",
+      "bytes": 1023,
+      "sha256": "51956df5117f023299aea4ef162de3e3a344d5abde3d41f80c49957ce180d662"
+    },
+    {
+      "path": "07_来源/来源与许可.md",
+      "bytes": 595,
+      "sha256": "8349ca11f8965cbeb190a714fc97bb6e25d55fc3912f70206d8ab579c05b7fb2"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1093,
+      "sha256": "219ff6a95653cb52885ff73e8ec0299aff54d9d14c3a511f537a9097cda319aa"
+    },
+    {
+      "path": "README.md",
+      "bytes": 9964,
+      "sha256": "34678b24ba430ac14d369dfd9bc551e3f3b2db7dc6ad5ab9ce32fe41f134218c"
+    }
+  ]
+}

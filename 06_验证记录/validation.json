@@ -1,0 +1,18 @@
+{
+  "version": "public-methods-1.1",
+  "source": "hand_written_synthetic_examples",
+  "behavioral_tests_passed": 24,
+  "python_demo": "PASS",
+  "node_python_bridge": "PASS",
+  "skill_format": "PASS",
+  "readme_examples": "PASS",
+  "typescript_reference": "PASS",
+  "default_demo_and_test_cleanup": "PASS",
+  "business_data_distributed": false,
+  "llm_connected": false,
+  "notes": [
+    "Static release-file inspection only",
+    "No production outcome claims",
+    "External solvers and geometric validator are not included"
+  ]
+}

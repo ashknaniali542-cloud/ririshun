@@ -1,0 +1,62 @@
+{
+  "apiVersion": "1.0.0-draft",
+  "jobId": "example-review-001",
+  "request": {
+    "apiVersion": "1.0.0-draft",
+    "datasetId": "example-dataset",
+    "snapshotRef": {
+      "id": "example-snapshot",
+      "version": "1"
+    },
+    "runRef": {
+      "id": "example-run",
+      "version": "1"
+    },
+    "planRef": {
+      "id": "example-plan",
+      "version": "1"
+    },
+    "configVersion": "example-config-1",
+    "evidenceBundleRef": {
+      "id": "example-evidence",
+      "version": "1"
+    },
+    "module": "routine",
+    "reviewMode": "result_review",
+    "purpose": "retrospective_review",
+    "knowledgeCutoff": "2026-10-28T10:00:00+08:00",
+    "idempotencyKey": "example-request-001"
+  },
+  "status": "completed",
+  "auditStatus": "PASS",
+  "llmStatus": "not_configured",
+  "report": {
+    "summary": "示例：确定性复核完成，尚未配置大模型。",
+    "deterministicChecks": [
+      {
+        "name": "示例会计恒等式检查",
+        "status": "PASS",
+        "evidenceIds": [
+          "example-evidence-001"
+        ]
+      }
+    ],
+    "facts": [
+      {
+        "text": "此处只填写由后端核验的事实。",
+        "evidenceIds": [
+          "example-evidence-001"
+        ]
+      }
+    ],
+    "hypotheses": [],
+    "suggestions": [],
+    "experienceRefs": [],
+    "limitations": [
+      "此 JSON 仅用于接口说明；不能当作真实运行结果。",
+      "未重新求解、未验证三维几何。"
+    ],
+    "productionStateMutated": false
+  },
+  "error": null
+}

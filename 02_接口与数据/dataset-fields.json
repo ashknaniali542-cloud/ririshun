@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "description": "Required columns for the current offline audit functions. No business records or private file bindings.",
+  "datasets": {
+    "daily": {
+      "required_columns": [
+        "run_id",
+        "date",
+        "request",
+        "sales",
+        "lost",
+        "closing_E",
+        "closing_N",
+        "factory_receipt",
+        "warehouse_receipt",
+        "warehouse_out",
+        "sales_contribution",
+        "warehouse_transport_cost",
+        "net_contribution"
+      ]
+    },
+    "trips": {
+      "required_columns": [
+        "run_id",
+        "date",
+        "trip_id",
+        "source",
+        "destination",
+        "available",
+        "quantity",
+        "SKU_count",
+        "quantity_vector",
+        "weight_kg",
+        "volume_m3",
+        "cost_CNY"
+      ]
+    },
+    "forecast": {
+      "required_columns": [
+        "node",
+        "date",
+        "actual",
+        "selected",
+        "lower",
+        "upper"
+      ]
+    },
+    "emergency": {
+      "required_columns": [
+        "panel",
+        "arm",
+        "J",
+        "emergency",
+        "local",
+        "transport",
+        "gap",
+        "served",
+        "satisfaction",
+        "seconds",
+        "valid"
+      ]
+    },
+    "paired": {
+      "required_columns": [
+        "run_id",
+        "baseline_run_id",
+        "window",
+        "baseline",
+        "delta_net_CNY",
+        "delta_net_wanyuan"
+      ]
+    }
+  },
+  "vehicle_required_for_trips": [
+    "kg",
+    "m3"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "apiVersion": "1.0.0-draft",
+  "datasetId": "example-dataset",
+  "snapshotRef": {
+    "id": "example-snapshot",
+    "version": "1"
+  },
+  "runRef": {
+    "id": "example-run",
+    "version": "1"
+  },
+  "planRef": {
+    "id": "example-plan",
+    "version": "1"
+  },
+  "configVersion": "example-config-1",
+  "evidenceBundleRef": {
+    "id": "example-evidence",
+    "version": "1"
+  },
+  "module": "routine",
+  "reviewMode": "result_review",
+  "purpose": "retrospective_review",
+  "knowledgeCutoff": "2026-10-28T10:00:00+08:00",
+  "idempotencyKey": "example-request-001"
+}

@@ -1,0 +1,5 @@
+{
+  "jobId": "example-review-001",
+  "status": "queued",
+  "statusUrl": "/api/local/v1/ai-reviews/example-review-001"
+}
