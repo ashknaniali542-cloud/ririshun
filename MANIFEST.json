@@ -1,5 +1,5 @@
 {
-  "version": "public-methods-1.1",
+  "version": "vO.1.0",
   "content": "Methods, code, artificial-data generators and documentation only",
   "files": [
     {
@@ -134,13 +134,13 @@
     },
     {
       "path": "06_验证记录/validation.json",
-      "bytes": 548,
-      "sha256": "252423099ebb7d71877f88e6a9749e86abe2fe3853d5c421aab73844f69e6d11"
+      "bytes": 562,
+      "sha256": "c7f53b90ebd008d5ee9f23b48d292af8bb843b46361c466061f2e7f9f7ca5c89"
     },
     {
       "path": "06_验证记录/验证摘要.md",
-      "bytes": 1023,
-      "sha256": "51956df5117f023299aea4ef162de3e3a344d5abde3d41f80c49957ce180d662"
+      "bytes": 1029,
+      "sha256": "fb3f8cf5cb033a909327062848c239a1083e43e5d4c81125d44a64f7c82e971e"
     },
     {
       "path": "07_来源/来源与许可.md",
@@ -154,8 +154,13 @@
     },
     {
       "path": "README.md",
-      "bytes": 9964,
-      "sha256": "34678b24ba430ac14d369dfd9bc551e3f3b2db7dc6ad5ab9ce32fe41f134218c"
+      "bytes": 10040,
+      "sha256": "8eceb0a578f2a3751b57e9f0db3998588d7a920e1872ba460d427e73d501e9be"
+    },
+    {
+      "path": "RELEASE_NOTES.md",
+      "bytes": 1121,
+      "sha256": "6415936cd22d447e398c9b4da05f78979e5c04ee73262f2026866bbc020b5b68"
     }
   ]
 }

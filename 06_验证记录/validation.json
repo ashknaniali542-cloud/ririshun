@@ -1,5 +1,5 @@
 {
-  "version": "public-methods-1.1",
+  "version": "vO.1.0",
   "source": "hand_written_synthetic_examples",
   "behavioral_tests_passed": 24,
   "python_demo": "PASS",
@@ -14,5 +14,6 @@
     "Static release-file inspection only",
     "No production outcome claims",
     "External solvers and geometric validator are not included"
-  ]
+  ],
+  "release_revalidated_on": "2026-10-28"
 }
